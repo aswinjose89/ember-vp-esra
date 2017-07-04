@@ -1,0 +1,10 @@
+ {{#if componentConfig.dueDate}}
+    {{wb-md-input type=componentConfig.dueDate.type
+                                        label=componentConfig.dueDate.label
+                                        format=componentConfig.dueDate.format
+                                        value=componentConfig.followupTasks.emailReminderDate
+                                        required=componentConfig.dueDate.required
+                                        startDate=(date-format componentConfig.dueDate.startDate flag='REMINDER_START_DATE')
+                                        endDate=(date-format componentConfig.followupTasks.dueDate flag='REMINDER_END_DATE')
+                                        leftIconName=componentConfig.dueDate.leftIconName }}
+{{/if}}

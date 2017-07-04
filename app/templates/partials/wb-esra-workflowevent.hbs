@@ -1,0 +1,26 @@
+ {{#if componentConfig.multiselect}}
+ {{wb-md-input 
+                type='select'
+                content=userContent
+                selectedItems=dataJSON.headerDataJSON.assignees
+                config=componentConfig.assignee.userSearchConfig
+                remoteSearch= true
+                leftIconName="person"
+                onOpen=(action 'selectOpenBox' componentConfig.assignee.searchFlag)
+                searchAction=(action 'searchEsrmAssignee')}}
+{{/if}}
+ {{#if (and componentConfig.BRRRC_Enabled (is-equal componentConfig.esraActivity.userRole '0005'))}}
+ {{wb-md-radio-group
+                title=componentConfig.escalatedBRRRC.title 
+                required=componentConfig.escalatedBRRRC.required
+                action=componentConfig.escalatedBRRRC.action
+                selectedItem=dataJSON.headerDataJSON.escalatedBRRRC
+                content=componentConfig.escalatedBRRRC.content}}
+ {{/if}}
+   
+{{wb-md-input
+                label=componentConfig.comments.label 
+                leftIconName=componentConfig.comments.leftIconName
+                maxLength= componentConfig.comments.maxLength
+                required= componentConfig.comments.required
+                value=  dataJSON.headerDataJSON.comment}}   

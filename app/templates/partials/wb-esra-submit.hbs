@@ -1,0 +1,13 @@
+{{wb-md-radio-group
+                title=componentConfig.approvalRoute.title 
+                required=componentConfig.approvalRoute.required
+                action=componentConfig.approvalRoute.action
+                selectedItem=dataJSON.headerDataJSON.selectedItem
+                content=(config-handler componentConfig.approvalRoute.content field = 'approvalRoute' controls = componentConfig.esraActivity)}}
+          
+{{wb-md-input
+                label=componentConfig.comments.label 
+                leftIconName=componentConfig.comments.leftIconName
+                maxLength= componentConfig.comments.maxLength
+                value=  dataJSON.headerDataJSON.comment
+                required=conditionalMandatory}}   

@@ -1,0 +1,29 @@
+{{detailsDraftSaveDisable}}
+{{#wb-md-card}}
+{{#wb-md-content-toolbar-row class="static-info gray-border"}}
+{{#wb-md-content-toolbar-element class="col-xs-12"}}
+<div class="content-toolbar__title content-toolbar__title_color_blue">
+   Deal Description
+</div>
+{{/wb-md-content-toolbar-element}}
+{{/wb-md-content-toolbar-row}}
+{{wb-md-input type="text" leftIconName='chat' required=model.isDescriptionInValid maxLength=1000 multiline=true value=model.description readonly=model.esraActivity.readOnly}}
+
+{{/wb-md-card}}
+{{#wb-md-card}}
+
+{{wb-md-table config=(readOnly esraDetailMembersConfig model=model type='table') selectedItems=selectedLeads content=esraDetailedMembersData queryAction=(action 'detailMemberQueryAction')}}
+
+ {{/wb-md-card}}
+{{#wb-md-card}}
+{{#wb-md-content-toolbar-row class="static-info gray-border"}}
+{{#wb-md-content-toolbar-element class="col-xs-12"}}
+ <div class="content-toolbar__title content-toolbar__title_color_blue pull-left attachment-align">
+        Attachments
+</div>
+{{wb-md-button type='link' color="blue" class="pull-right" label="+ ADD" disabled=model.esraActivity.isAttachmentDisabled action="openAttachmentFlyout"}}
+{{/wb-md-content-toolbar-element}}
+{{/wb-md-content-toolbar-row}}
+  {{wb-md-table config=(readOnly esraDetailAtmntConfig model=model type='table' tableName='attachment') selectedItems=selectedLeads content=esraDetailedAtmntData queryAction=(action 'detailAttachmentQueryAction')}}
+
+ {{/wb-md-card}}

@@ -1,0 +1,58 @@
+{{getConfig}}
+{{#wb-md-popup size='large'}}
+	{{#wb-md-content-toolbar  color='blue' pad='full' }}
+		<div class="content-toolbar__row">
+			<div class="content-toolbar__element">
+			       <div class="content-toolbar__title">
+			       		Audit Trail
+			       </div>
+			</div>
+		</div>
+	{{/wb-md-content-toolbar}}
+
+    {{#wb-md-content-toolbar  color='blue' pad='full' }}
+        <div class="content-toolbar__row">
+            <div class="content-toolbar__element">
+                   {{wb-md-tabs
+                    selectedIndex=tabSelectedIndex
+                    isLite=true
+                    isStatic=true
+                    tabs=esraAuditTrailTabContent
+                    onClick=(action 'esraAuditTabClick')
+                    isTriggerClickOnLoad=isTriggerClickOnLoad
+                   }}
+            </div>
+        </div>
+    {{/wb-md-content-toolbar}}
+
+	<div class="global-popup__content">
+		{{#wb-md-tabs-content selectedIndex= tabSelectedIndex }}
+			{{#each esraAuditTrailTabContent as |eachTab|}}
+			    {{#wb-md-tab-content}}
+			    	{{#if tableContent}}
+				        {{#wb-md-card}}
+				        	{{wb-md-table config=esraAuditTrailTableConfig content=tableContent}}
+				        {{/wb-md-card}}
+				    {{else}}
+				    	{{#wb-md-content-toolbar position="center"}}
+				            <div class="content-toolbar__row">
+				                <div class="content-toolbar__element">
+                                    No audit trail data available for the "{{eachTab.label}}" tab
+				                </div>
+				            </div>
+        				{{/wb-md-content-toolbar}}
+				    {{/if}}
+			    {{/wb-md-tab-content}}
+			{{/each}}
+		{{/wb-md-tabs-content}}
+	</div>
+
+	{{#wb-md-content-toolbar  color='gray' position="right"}}
+		<div class="content-toolbar__row">
+			<div class="content-toolbar__element">
+			    {{wb-md-button action='closeDialog'  type="primary"
+			      label="DONE" color='blue'}}
+			</div>
+		</div>
+	{{/wb-md-content-toolbar}}
+{{/wb-md-popup}}

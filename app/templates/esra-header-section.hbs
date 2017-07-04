@@ -1,0 +1,10 @@
+{{wb-esra-header model=model deleteAction="deleteESRA" doRefresh="doRefresh"
+                 goBack="goBack"
+                 openAuditTrail="openAuditTrail"
+                 saveDraft="saveDraft"
+                 getAssessment="getAssessment"}}
+{{#if model.esraActivity.locked}}
+                   {{#wb-md-card-message type="warning" iconName="info_outline" iconColor="white" linkText="DISMISS"}}
+                      {{model.esraActivity.lockMessage}}
+                   {{/wb-md-card-message}}
+                 {{/if}}

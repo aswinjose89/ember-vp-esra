@@ -1,0 +1,45 @@
+{{#if model.label}}
+    {{model.label}}
+{{/if}}
+{{!#each sections.vertical as |section|}}
+    {{!#each section.fsFields as |fsField|}}
+        {{!#if fsField.visible}}
+            <!-- TODO: Remove IF condition, need different approach -->
+            {{!#if (is-equal fsField.type 'wb-textarea')}}
+                {{!#wb-md-card class="commentBox"}}
+                    {{!wb-esra-field field=fsField}}
+                {{!/wb-md-card}}
+            {{!else}}
+                {{!#wb-md-card}}
+                    {{!wb-esra-field field=fsField}}
+                {{!/wb-md-card}}
+            {{!/if}}
+        {{!/if}}
+    {{!/each}}
+{{!/each}}
+{{!#each sections.tabs as |section|}}
+    {{!#wb-md-card}}
+        {{!wb-esra-sector model=section tabSections=sections.tab}}
+    {{!/wb-md-card}}
+{{!/each}}
+{{assessmentDraftSaveDisable}}
+{{assessmentConsumerPayload}}
+{{#each allSections as |section|}}
+ <div>
+        {{#if section.visible}}
+            {{#if (is-equal section.layout 'vertical')}}
+                {{#each section.fsFields as |fsField|}}
+                    {{#if fsField.visible}}
+                        {{#wb-md-card class=(if (is-equal fsField.type 'wb-textarea') 'commentBox')}}
+                                {{wb-esra-field model=fsField form=model.fsForm doRefresh=(action "doRefresh") screenReadOnly=esraActivity.readOnly esraActivity=esraActivity}}
+                        {{/wb-md-card}}
+                    {{/if}}
+                {{/each}}
+            {{else if (is-equal section.layout 'tabs')}}
+                {{#wb-md-card}}
+                    {{wb-esra-sector model=section fsForm=model.fsForm tabSections=tabs doRefresh=(action "doRefresh") screenReadOnly=esraActivity.readOnly esraActivity=esraActivity}}
+                {{/wb-md-card}}
+            {{/if}}
+        {{/if}}
+    </div>
+{{/each}}

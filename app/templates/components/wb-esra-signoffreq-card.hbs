@@ -1,0 +1,82 @@
+{{#unless signoffreq.deleted}}
+    {{#if (or (is-equal signoffActivity.signoffReqReadonly 'V') (is-equal signoffActivity.signoffReqReadonly 'E'))}}
+                {{#wb-md-content-toolbar pad="full"}}
+            <div class="content-toolbar__row">
+                <div class="content-toolbar__element">
+                    {{wb-md-entity-icon color="green-500" size="medium" iconName="deal"}}
+                </div>
+                <div class="content-toolbar__element">
+                    <h2 class="discussion__title">Requirement # {{signoffOrderIndex}}</h2>
+                </div>
+                <div class="content-toolbar__element">{{wb-md-tag color=reqStatusLabel.iconColor label=reqStatusLabel.description}}</div>
+            </div>
+            <div class="content-toolbar__row">
+                <div class="content-toolbar__element">
+                    <div class="global-icon-toolbar__element">
+                        {{wb-md-action-menu config=(config-handler signoffreqActionMenu field = 'MenuAction' controls = signoffActivity) class = (if (or (is-equal signoffActivity.signoffReqReadonly 'V') esraActivity.locked) 'pointer-disabled') flag='sgnoffreqMenuaction'}}
+                    </div>
+                </div>
+                <div class="content-toolbar__element">
+                    <div class="margin-left-20px global-icon-toolbar__element">
+                        {{wb-md-icon iconName=(if IsToggleEnabled toggleTaskIconConfig.toggleElement.iconAlternative toggleTaskIconConfig.toggleElement.iconDefault) click=(action toggleProperty 'IsToggleEnabled') active=IsToggleEnabled}}
+                    </div>
+            </div>
+            </div>
+        {{/wb-md-content-toolbar}}
+        <div class="discussion__body">
+            <div class="discussion__sidebar">
+                {{wb-md-static-info label="Follow-up Task" value=signoffOpenTask}}
+            </div>
+            <div class="discussion__main padding_right_42px">
+                {{wb-md-static-info label="Requirement Details" content=signoffreq.requirements showMore=true}}
+                {{#if IsToggleEnabled}}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{wb-md-static-info label=signoffconstant.label.dueDate value=(date-format signoffreq.dueDate flag='dateformat') inlineList=true}}
+                        </div>
+                        <div class="col-lg-6">
+                            {{wb-md-static-info label=signoffconstant.label.repeat value=(picklist-value signoffreq.repeat type='SIGNOFFREPEAT') inlineList=true}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                             {{wb-md-static-info label=signoffconstant.label.type value=(picklist-value signoffreq.type type='SIGNOFFTYPE') inlineList=true}}
+                        </div>
+                        <div class="col-lg-6">
+                            {{#if (or (is-equal signoffActivity.requirementStatusEnabled 'V') (is-equal signoffActivity.requirementStatusEnabled 'E'))  }}
+                                      {{wb-md-input label=signoffconstant.label.reqStatus type='select' content=reqStatus selectedItem=reqStatusSelectedVal
+                                optionValuePath='code' value=signoffreq.status disabled=(or disableReqStatus esraActivity.locked) optionLabelPath='description' inlineList=true}}
+                            {{/if}}
+                        </div>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+
+    {{/if}}
+    {{#if IsToggleEnabled}}
+        <div class="card-title">
+            <div class="card-title__left">
+                <h2>{{signoffconstant.titles.signoffAtn}}</h2>
+            </div>
+            <div class="card-title__right">
+                {{#if (and (or (is-equal signoffActivity.createSignoffTaskEnabled 'V') (is-equal signoffActivity.createSignoffTaskEnabled 'E')) (is-equal signoffreq.status '0003'))  }}
+                    {{wb-md-button type="link" label=signoffconstant.label.addActionBtn disabled=(or signoffActivity.IsDisablecreateSignoffTask esraActivity.locked) size="small" click=(action 'openPopup' signoffreq)}}
+                {{/if}}
+            </div>
+        </div>
+        {{#if (array-length signoffreq.followupTasks flag="signoffAtn")}}
+            <div class="card-no-data gray-border_top">
+                {{signoffconstant.contents.addFollowupAtn}}
+            </div>
+        {{else}}
+            {{wb-esra-signoff-action followupTask=signoffreq.followupTasks
+                        triggerFollowUpDeleteAction=(action 'deleteFollowupAction')
+                        signoffActivity=signoffActivity
+                        signoffreq=signoffreq
+                        esraActivity=esraActivity
+                        dealDoc=dealDoc}}
+        {{/if}}
+    {{/if}}
+{{/unless}}
+{{signoffActionHighlight}}

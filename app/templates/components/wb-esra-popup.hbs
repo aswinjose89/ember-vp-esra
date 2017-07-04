@@ -1,0 +1,74 @@
+{{#wb-md-popup size="medium"}}
+    {{#wb-md-content-toolbar border=(if componentConfig.showTopBar "bottom") color=(if componentConfig.toolbarColor componentConfig.toolbarColor 'blue' ) pad="full" }}
+        <div class="content-toolbar__row">
+            <div class="content-toolbar__element">
+                <div class="content-toolbar__title">
+                     {{componentConfig.title}}
+                </div>
+            </div>
+        </div>
+    {{/wb-md-content-toolbar}}
+    <div class="global-popup__content">
+        {{#if componentConfig.message}}
+        <div class="global-popup__text">
+            <p>
+                {{componentConfig.message}}
+            </p>
+        </div>
+        {{/if}}
+         {{#if (is-equal componentConfig.esraAction 'submit')}}
+            {{partial 'partials/wb-esra-submit'}}
+        {{else if (is-equal componentConfig.esraAction 'createsignoffTask')}}
+            {{partial 'partials/wb-esra-createsignoff'}}    
+        {{else if (is-equal componentConfig.esraAction 'workflowevent')}}
+            {{partial 'partials/wb-esra-workflowevent'}}     
+         {{else if (is-equal componentConfig.esraAction 'signoffworkflowevent')}}
+            {{partial 'partials/wb-esra-signoff-workflowevent'}}
+        {{else if (is-equal componentConfig.esraAction 'emailReminder')}}
+            {{partial 'partials/wb-esra-email-reminder'}}
+        {{/if}}
+    </div>
+{{#if componentConfig.simultaneousButtons}}
+    {{#wb-md-content-toolbar color=(if componentConfig.showActionBar 'gray') }}
+        <div class="content-toolbar__row toolbar_display_inline">
+             {{#each componentConfig.buttonSection as | btnData |}}
+                {{#if btnData.isAttachment}}
+                 <div class={{if btnData.positionClass btnData.positionClass 'content-toolbar__element pull-right'}}>
+                    {{wb-md-file-upload placeHolder=btnData.placeHolder maxSize=btnData.maxSize afterFileSelect=btnData.action iconName=btnData.iconName}}
+                </div>
+                {{else if btnData.buttonIcon}}
+                    {{wb-md-icon iconName=btnData.iconName click=(action btnData.action componentConfig.followupTasks componentConfig.actionMenu)}}
+                {{else if btnData.disableoption}}
+                    <div class={{if btnData.positionClass btnData.positionClass 'content-toolbar__element pull-right'}}>
+                        {{wb-md-button click=(action btnData.action componentConfig.followupTasks componentConfig.actionMenu) disabled=(if (is-equal componentConfig.esraAction 'createsignoffTask') isButtonInValid isButtonDisabled) color=btnData.color type=btnData.type label=btnData.label}}
+                    </div>
+                {{else}}
+                    <div class={{if btnData.positionClass btnData.positionClass 'content-toolbar__element pull-right'}}>
+                        {{wb-md-button click=(action btnData.action componentConfig.followupTasks componentConfig.actionMenu) color=btnData.color type=btnData.type label=btnData.label}}
+                    </div>
+                {{/if}}
+            {{/each}}
+        </div>
+    {{/wb-md-content-toolbar}}
+{{else}}
+    {{#wb-md-content-toolbar color=(if componentConfig.showActionBar 'gray') position="right" }}
+            <div class="content-toolbar__row">
+                {{#each componentConfig.buttonSection as | btnData |}}                
+                    {{#if btnData.conditionalDisable}}
+                        <div class="content-toolbar__element">
+                            {{wb-md-button click=(action btnData.action componentConfig.followupTasks componentConfig.actionMenu) disabled=conditionalMandatory color=btnData.color type=btnData.type label=btnData.label}}
+                        </div>
+                    {{else if btnData.disableoption}}
+                        <div class="content-toolbar__element">
+                            {{wb-md-button click=(action btnData.action componentConfig.followupTasks componentConfig.actionMenu) disabled=(if (is-equal componentConfig.esraAction 'createsignoffTask') isButtonInValid isButtonDisabled) color=btnData.color type=btnData.type label=btnData.label}}
+                        </div>
+                    {{else}}
+                        <div class="content-toolbar__element">
+                            {{wb-md-button click=(action btnData.action componentConfig.followupTasks) color=btnData.color type=btnData.type label=btnData.label}}
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+    {{/wb-md-content-toolbar}}
+{{/if}}    
+{{/wb-md-popup}}

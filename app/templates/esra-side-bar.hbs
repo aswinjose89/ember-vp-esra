@@ -1,0 +1,18 @@
+{{#wb-md-sidebar-nav config=model.navConfig}}
+    {{#wb-md-sidebar-nav-item 'summary.details' iconName='deal'}}
+        Details and Attachments
+    {{/wb-md-sidebar-nav-item}}
+    {{#wb-md-sidebar-nav-item 'summary.assessment' iconName='check'}}
+        {{wb-md-sidebar-nav-menu-item-label label='Assessment' status=model.esraActivity.assessmentStatus}}
+    {{/wb-md-sidebar-nav-item}}
+    <div class={{if model.esraActivityStatus 'pointer-disabled'}}>
+      {{#wb-md-sidebar-nav-item 'summary.signoffReq' iconName='check'}}
+        {{wb-md-sidebar-nav-menu-item-label label='Sign Off Requirements' status=model.esraActivity.signoffReqStatus}}
+      {{/wb-md-sidebar-nav-item}}
+    </div>
+    <div class={{unless model.esraActivity.workflowHistoryEnabled 'pointer-disabled'}}>
+      {{#wb-md-sidebar-nav-item 'summary.workflowHistory' iconName='restore'}}
+        Workflow History
+      {{/wb-md-sidebar-nav-item}}
+    </div>
+{{/wb-md-sidebar-nav}}

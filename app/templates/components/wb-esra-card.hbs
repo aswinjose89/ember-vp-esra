@@ -1,0 +1,22 @@
+{{#wb-md-content-toolbar pad="null" height="auto"}}
+    <div class="content-toolbar__row">
+        <div class="content-toolbar__element">
+            <strong>{{workflowCardDet.updatedBy}}</strong>
+        </div>
+        <div class="content-toolbar__element">
+            {{wb-md-tag label=(picklistValue workflowCardDet.action type="ACTIONTYPE") color=(picklistValue workflowCardDet.action type="ACTIONTYPE" color=true)}}
+        </div>
+    </div>
+    <div class="content-toolbar__row">
+        <div class="content-toolbar__element">
+            <strong>{{workflowCardDet.formattedUpdatedOn}}</strong>
+        </div>
+    </div>
+{{/wb-md-content-toolbar}}
+{{#wb-md-card}}
+     <div class="static-info-group">
+        {{wb-md-static-info label="Before Status" value=(picklistValue workflowCardDet.beforeStatus type="STATUSTYPE") size="medium"}}
+        {{wb-md-static-info label="After Status" value=(picklistValue workflowCardDet.afterStatus type="STATUSTYPE") size="medium"}}
+    </div>
+        {{wb-md-card-comment value=workflowCardDet.comments editable=false}}
+{{/wb-md-card}}

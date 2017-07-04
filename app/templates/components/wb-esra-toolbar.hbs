@@ -1,0 +1,19 @@
+ {{#wb-md-content-toolbar pad="full" height="auto" vertical="top"}}
+            <div class="content-toolbar__row">
+                <div class="content-toolbar__element">
+                    <div class="followup-task__message">
+                        <div class="followup-task__message-icon">
+                            {{wb-md-checkbox checked=(is-equal followupTsk.taskStatus '0002') iconColor=(if (is-equal followupTsk.taskStatus '0002') 'green-500')}}
+                        </div>
+                        <div class="followup-task__message-content {{if (is-equal followupTsk.taskStatus '0002') ' followup-task__message-content_status_stroke'}}">
+                            {{followupTsk.actionRequired}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-toolbar__row">
+                <div class="content-toolbar__element">
+                    {{wb-md-action-menu config=(config-handler followupActionMenu field = 'MenuAction' controls = signoffActivity)}}
+                </div>
+            </div>
+    {{/wb-md-content-toolbar}}

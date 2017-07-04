@@ -1,0 +1,90 @@
+{{#wb-md-popup size="large"}}
+    {{#wb-md-content-toolbar border=(if componentConfig.showTopBar "bottom") color='blue' pad="full" }}
+        <div class="content-toolbar__row">
+            <div class="content-toolbar__element">
+                <div class="content-toolbar__title">
+                     {{componentConfig.title}}
+                </div>
+            </div>
+        </div>
+    {{/wb-md-content-toolbar}}    
+    {{#if (is-equal componentConfig.esraAction 'createsignoffReq')}}  
+        <div class="global-popup__content signoffreq">     
+                {{wb-md-input label=componentConfig.requirement.label
+                                maxLength=componentConfig.requirement.maxLength 
+                                multiline=true
+                                value=componentConfig.signoffModel.requirements
+                                leftIconName=componentConfig.requirement.leftIconName
+                                required=componentConfig.requirement.required }}   
+            <div class="row">
+                <div class="col-lg-4">
+                    {{wb-md-input type=componentConfig.dueDate.type 
+                                label=componentConfig.dueDate.label
+                                format=componentConfig.dueDate.format 
+                                value=componentConfig.signoffModel.dueDate
+                                required=componentConfig.dueDate.required 
+                                startDate=componentConfig.dueDate.startDate }}
+                </div>
+                <div class="col-lg-4">
+                    {{wb-md-input   label=componentConfig.type.label 
+                                    type=componentConfig.type.type  
+                                    content=signoffType 
+                                    value=componentConfig.signoffModel.type
+                                    optionValuePath=componentConfig.type.optionValuePath 
+                                    optionLabelPath=componentConfig.type.optionLabelPath 
+                                    inlineList=true}}
+                </div>
+                <div class="col-lg-4">
+                    {{wb-md-input   label=componentConfig.repeat.label 
+                                    type=componentConfig.repeat.type  
+                                    content=signoffReqRepeat 
+                                    value=componentConfig.signoffModel.repeat
+                                    optionValuePath=componentConfig.repeat.optionValuePath 
+                                    optionLabelPath=componentConfig.repeat.optionLabelPath 
+                                    inlineList=true}}
+                </div>
+        </div>   
+        </div>
+    {{/if}}  
+ {{#if (or (is-equal componentConfig.signoffActivity.createSignoffTaskEnabled 'V') (is-equal componentConfig.signoffActivity.createSignoffTaskEnabled 'E'))}}
+   <div class={{if (is-equal componentConfig.signoffActivity.createSignoffTaskEnabled 'V') 'pointer-disabled'}}>
+    {{#wb-md-content-toolbar pad="full"}}
+            <div class="content-toolbar__row">
+                <div class="content-toolbar__element">
+                    <div class="content-toolbar__title content-toolbar__title_color_blue">{{signoffconstant.titles.signoffAtn}}</div>
+                </div>
+            </div>
+            <div class="content-toolbar__row">
+                <div class="content-toolbar__element">
+                    {{wb-md-button type="link" label=signoffconstant.label.addBtn size="small" click=(action "openPopup" componentConfig.signoffModel)}}
+                </div>
+            </div>
+    {{/wb-md-content-toolbar}}
+
+         {{#if (array-length componentConfig.signoffModel.followupTasks flag="signoffAtn")}}
+
+            <div class="card-no-data">
+                    {{wb-md-icon iconName="help_text" helpText="some help text"}}
+                {{signoffconstant.contents.addFollowupAtn}}
+            </div>
+            {{else}}
+                {{wb-esra-signoff-action followupTask=componentConfig.signoffModel.followupTasks signoffActivity=componentConfig.signoffActivity signoffActionClass='signoffAction'}}
+        {{/if}}
+   </div>
+{{/if}}
+    {{#wb-md-content-toolbar color=(if componentConfig.showActionBar 'gray') position="right" }}
+        <div class="content-toolbar__row">
+             {{#each componentConfig.buttonSection as | btnData |}}
+             {{#if btnData.disableoption}}
+                <div class="content-toolbar__element">
+                    {{wb-md-button click=(action btnData.action componentConfig.signoffModel) disabled=(if (is-equal componentConfig.esraAction 'createsignoffReq') isButtonInValid) color=btnData.color type=btnData.type label=btnData.label}}
+                </div>
+             {{else}}
+                 <div class="content-toolbar__element">
+                    {{wb-md-button click=(action btnData.action componentConfig.signoffModel) color=btnData.color type=btnData.type label=btnData.label}}
+                </div>
+            {{/if}}
+            {{/each}}
+        </div>
+    {{/wb-md-content-toolbar}}
+{{/wb-md-popup}}

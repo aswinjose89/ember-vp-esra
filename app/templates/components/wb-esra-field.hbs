@@ -1,0 +1,15 @@
+{{#if model.visible}}
+    {{#if (not (is-equal model.type "wb-textarea"))}}
+        {{#if (is-equal model.type "wb-radio")}}
+            {{wb-md-radio-group optionLabelPath="displayText" title=model.label content=(list-creation model) required=model.mandatory name=model.name value=model.value onChange=(action 'onValueChange') class=(if model.error 'error') disabled=(or screenReadOnly isReadOnly)}}
+        {{/if}}
+        {{#if (is-equal model.type "wb-dropdown")}}
+            {{wb-md-input type='select' isError=model.error label=model.label isReadOnly=(or screenReadOnly isReadOnly) value=model.value config=dpConfig onChange='onValueChange' required=model.mandatory}}
+        {{/if}}
+        {{#if (is-equal (assesment-handler model flag="LABELCONDITION") true)}}           
+            {{wb-esra-label label=sectorLabelDtl.labelName value=sectorLabelDtl.labelValue}}
+        {{/if}}
+    {{else}}        
+        {{wb-md-input isError=model.error label=model.label placeholder=(if model.label null "Justify Categorisation") isReadOnly=(or screenReadOnly isReadOnly)  multiline=true maxLength=model.fsValidations.maxLength name=model.name value=model.value required=model.mandatory}}    
+    {{/if}}
+{{/if}}

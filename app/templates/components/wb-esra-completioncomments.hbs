@@ -1,0 +1,116 @@
+ {{#if followupTsk.aoCompletionComments}}
+        <div class="row">
+            {{#wb-md-content-toolbar pad="full" height="auto" vertical="top"}}
+                    <div class="content-toolbar__row">
+                        <div class="content-toolbar__element">
+                            <div class="followup-task__message">
+                                <div class="followup-task__message-icon">
+                                    {{wb-md-icon iconName="chat" isDisabled=(if (or entitlementHandler.cardDisabled esraActivity.locked) 'pointer-disabled')}}
+                                </div>
+                                <div class="followup-task__message-content">
+                                    {{followupTsk.aoCompletionComments}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {{/wb-md-content-toolbar}}
+        </div>
+         {{#if followupTsk.completionDtl.length}}
+            <div class="row">
+                <div class="col-lg-12">
+                    {{wb-md-static-info label=signoffconstant.label.completedOn list=followupTsk.completionDtl inlineList=true}}
+                </div>
+            </div>
+        {{/if}}
+        {{#if attachmentList.aoAttachment.length}}
+            <div class="row">
+                {{wb-md-attachment-list-slider fileList=attachmentList.aoAttachment
+                                                openAttachmentAction="fileDownload"
+                                                deleteFileAction="deleteFileAction"                                               
+                                                deleteConfirmationMessage=deletePopupconfig.message
+                                                deleteConfirmationMessageTitle=deletePopupconfig.title}}
+            </div>
+       {{/if}}
+    {{/if}}
+    {{#if followupTsk.referredToEsrmComments}}
+        <div class="card-title">
+            <div class="card-title__left">
+                <h2>Refer to ESRM</h2>
+            </div>
+        </div>
+        <div class="row">
+            {{#wb-md-content-toolbar pad="full" height="auto" vertical="top"}}
+                    <div class="content-toolbar__row">
+                        <div class="content-toolbar__element">
+                            <div class="followup-task__message">
+                                <div class="followup-task__message-icon">
+                                    {{wb-md-icon iconName="chat" isDisabled=(if (or entitlementHandler.cardDisabled esraActivity.locked) 'pointer-disabled')}}
+                                </div>
+                                <div class="followup-task__message-content">
+                                    {{followupTsk.referredToEsrmComments}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {{/wb-md-content-toolbar}}
+        </div>
+         {{#if followupTsk.referToESRM_Dtl.length}}
+            <div class="row">
+                <div class="col-lg-12">
+                    {{wb-md-static-info label=signoffconstant.label.referByESRM list=followupTsk.referToESRM_Dtl inlineList=true}}
+                </div>
+            </div>
+        {{/if}}
+        {{#if attachmentList.referToEsrmAttachment.length}}
+            <div class="row">
+                {{wb-md-attachment-list-slider fileList=attachmentList.referToEsrmAttachment
+                                                openAttachmentAction="fileDownload"
+                                                deleteFileAction="deleteFileAction"                                                
+                                                deleteConfirmationMessage=deletePopupconfig.message
+                                                deleteConfirmationMessageTitle=deletePopupconfig.title}}
+            </div>
+     {{/if}}
+    {{/if}}
+     {{#if followupTsk.esrmApprovedComments}}
+        <div class="card-title">
+            <div class="card-title__left">
+                <h2>ESRM Comments</h2>
+            </div>
+        </div>
+        <div class="row">
+            {{#wb-md-content-toolbar pad="full" height="auto" vertical="top"}}
+                    <div class="content-toolbar__row">
+                        <div class="content-toolbar__element">
+                            <div class="followup-task__message">
+                                <div class="followup-task__message-icon">
+                                    {{wb-md-icon iconName="chat" isDisabled=(if (or entitlementHandler.cardDisabled esraActivity.locked) 'pointer-disabled')}}
+                                </div>
+                                <div class="followup-task__message-content">
+                                    {{followupTsk.esrmApprovedComments}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {{/wb-md-content-toolbar}}
+        </div>
+         {{#if followupTsk.referToESRM_Dtl.length}}
+            <div class="row">
+                <div class="col-lg-12">
+                    {{wb-md-static-info label=signoffconstant.label.esraApproved list=followupTsk.esrmApprovedDtl inlineList=true}}
+                </div>
+            </div>
+        {{/if}}
+            {{#if attachmentList.esrmApproverAttachment.length}}
+                <div class="row">
+                    {{wb-md-attachment-list-slider fileList=attachmentList.esrmApproverAttachment
+                                                    openAttachmentAction="fileDownload"
+                                                    deleteFileAction="deleteFileAction"                                                    
+                                                    deleteConfirmationMessage=deletePopupconfig.message
+                                                    deleteConfirmationMessageTitle=deletePopupconfig.title}}
+                </div>
+        {{/if}}
+    {{/if}}
+
+
+
+     

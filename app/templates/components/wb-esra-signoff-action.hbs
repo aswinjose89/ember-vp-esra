@@ -1,0 +1,11 @@
+{{#wb-md-card type="nested" class=signoffActionClass}}
+{{#each followupTask as |followupTsk|}}
+       {{wb-esra-signoffaction-card followupTsk=followupTsk
+        triggerFollowUpEditAction=(action 'updateSignoffAction')
+        triggerFollowUpDeleteAction=(action 'deleteFollowupAction')
+        signoffActivity=signoffActivity
+        signoffreq=signoffreq
+        esraActivity=esraActivity
+        dealDoc=dealDoc}}
+   {{/each}}
+    {{/wb-md-card}}

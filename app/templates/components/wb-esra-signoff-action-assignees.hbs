@@ -1,0 +1,29 @@
+<div class="ember-view static-info">
+    <div class="static-info__label ">
+        {{signoffconstant.label.dueDateResp}}
+    </div>
+    <div>
+        {{#each followupTsk.assignees as |assignees index|}} {{#if (lt index 3)}}
+        <div class="static-info__inline">
+                    <div class="static-info__content">
+                        <ul class="static-info__list  static-info__list_inline">
+                            <li class="duedateWidth">
+                                <div class="static-info__content">
+                                    {{#if (eq index 0)}}
+                                    <div class="static-info__value" {{action "showDateToolTip" (date-format followupTsk.dueDate flag='dateformat' ) on="mouseEnter"
+                                        }} {{action "hideToolTip" on="mouseLeave" }}>
+                                        {{date-format followupTsk.dueDate flag='dateformat'}}
+                                    </div>
+                                    {{/if}}
+                                </div>
+                            </li>
+                            <li {{action "showToolTip" followupTsk.assignees on="mouseEnter" }} {{action "hideToolTip"
+                                    on="mouseLeave" }}>                              
+                                    {{assignees.psId}} - {{assignees.name}}
+                            </li>
+                        </ul>
+                    </div>
+        </div>
+        {{/if}} {{/each}}
+    </div>
+</div>

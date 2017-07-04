@@ -1,0 +1,34 @@
+{{signoffDraftSaveDisable}}
+{{#wb-md-card}}
+
+        {{#wb-md-content-toolbar pad="full"}}
+            <div class="content-toolbar__row">
+                <div class="content-toolbar__element">
+                    <div class="content-toolbar__title content-toolbar__title_color_blue">{{signoffconstant.titles.signoffRq}}</div>
+                </div>
+            </div>
+            <div class="content-toolbar__row">
+                <div class="content-toolbar__element">
+                    {{#if (or (is-equal signoffActivity.createSignoffReqEnabled 'V') (is-equal signoffActivity.createSignoffReqEnabled 'E'))  }}
+                        {{wb-md-button type="link" label=signoffconstant.label.addReqBtn disabled=(or signoffActivity.IsDisableCreateSignoff esraActivity.locked) size="small" action="createSignOffReq"}}
+                    {{/if}}
+                </div>
+            </div>
+        {{/wb-md-content-toolbar}}
+  <div>
+  </div>
+    {{#if (array-length signoffRequirement flag="signoffReq")}}
+          <div class="card-no-data gray-border_top">{{signoffconstant.contents.addSignOff}}</div>
+     {{/if}}
+{{/wb-md-card}}
+{{#each signoffRequirement as |signoffreq signoffIndex|}}
+{{#wb-md-card}}
+         {{wb-esra-signoffreq-card signoffreq=signoffreq
+                                    triggerEditAction=(action 'updateSignOffReq')
+                                    triggerFollowUpDeleteAction=(action 'deleteFollowupAction')
+                                    signoffActivity=signoffActivity
+                                    esraActivity=esraActivity
+                                    dealDoc=dealDoc
+                                    signoffIndex=signoffIndex}}
+    {{/wb-md-card}}
+    {{/each}}

@@ -1,0 +1,51 @@
+{{disableDownload}}
+{{#wb-md-header-section}}
+  <div class="header-inline-top row marginTop15">
+    <div class="header-inline-top__left col-xs-11">
+      {{wb-md-icon iconName='arrow_back' color='white' action="goBack"}}
+      <div class="entity-name margin-right-20px">
+          TRANSACTION ESRA
+      </div>
+      <div class="header-module-divider"></div>
+      {{wb-md-entity-icon value='D' color='white' size='medium'}}
+      <div class="entity-name" {{action "showToolTip" model.dealName on="mouseEnter"}}{{action "hideToolTip" on="mouseLeave"}}>{{model.dealName}}</div>
+      <!-- TODO: Need to update the entityTags dynamically -->
+      {{#if (and (notEqual model.entityTags null) (notEqual model.entityTags "null"))}}
+          {{wb-md-entity-tag tags=(esra-entity-tags model.entityTags)}}
+      {{/if}}
+    </div>
+    <div class="col-xs-1">
+      {{#wb-md-header-section-toolbar class="pull-right" }}
+      {{wb-md-icon-toolbar config=headerMenuActionConfig}}
+      {{wb-md-header-section-toolbar-item class="margin-left-20px" elementType=(if toggleStaticInfo "unfold_less" "unfold_more") active=toggleStaticInfo click=(action toggleProperty 'toggleStaticInfo')}}
+      {{/wb-md-header-section-toolbar}}
+
+    </div>
+  </div>
+  <div class="header-inline-bottom">
+    {{#wb-md-header-section-static-info isStaticInfoHeaderToggled=toggleStaticInfo}}
+        {{wb-md-static-info size="small" color="white" label='Project/Deal Name' value=model.dealName}}
+        {{wb-md-static-info size="small" color="white" label='Deal ID' value=model.dealRefId}}
+        {{wb-md-static-info size="small" color="white" label='Deal Value' value=model.dealValue}}
+        {{wb-md-static-info size="small" color="white" label='Client Name' value=model.clientName}}
+        {{wb-md-static-info size="small" color="white" listLimit='1' label='Product type' list=(picklistValue model.productType type="PRODUCTTYPE")}}
+        {{wb-md-static-info size="small" color="white" listLimit='1' label='Deal Leader' list=dealTeamLeader}}
+        {{wb-md-static-info size="small" color="white" label='Deal Close Date' value=model.dealCloseDateFormat}}
+        {{wb-md-static-info size="small" color="white" label='Client ID' value=model.clientId}}
+        {{wb-md-static-info size="small" color="white" label='Domicile Country' value=model.domicileCountry}}
+        {{wb-md-static-info size="small" color="white" label='Deal Execution Country' value=model.dealExecutionCountry}}
+        {{wb-md-static-info size="small" color="white" listLimit='1' label='Sub-Product Type' list=(picklistValue model.subProductType type="SUBPRODUCTTYPE")}}
+        {{wb-md-static-info size="small" color="white" label='PFAM' list=model.pfam listLimit='1'}}
+        {{wb-md-static-info size="small" color="white" label='Submitted By' value=model.submittedBy}}
+        {{wb-md-static-info size="small" color="white" label='Approved By' value=model.approvedBy}}
+        {{wb-md-static-info size="small" color="white" label='Deal Stage' value=model.dealStage}}
+        {{wb-md-static-info size="small" color="white" label='Activity Status' value=model.esraActivity.statusDesc}}
+        {{#if (is-equal model.approvalRoute '0002')}}
+            {{wb-md-static-info size="small" color="white" label='Escalated to BRRRC' value=model.escalatedBRRRCFormatted}}
+            {{wb-md-static-info size="small" color="white" label='ESRA Approvers' listLimit='1' list=(picklistValue model.esraApprovers type="ESRAAPPROVERS")}}
+        {{/if}}
+    {{/wb-md-header-section-static-info}}
+     {{partial 'partials/wb-esra-workflowaction'}}
+  </div>
+{{/wb-md-header-section}}
+{{file-download}}

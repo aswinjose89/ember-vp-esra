@@ -1,0 +1,9 @@
+{
+  "modules" : {
+    "wb-ui-esra": {
+      "path": "/esra/assets/",
+      "load-on-startup": false,
+      "contextPath": "esra"
+    }
+  }
+}

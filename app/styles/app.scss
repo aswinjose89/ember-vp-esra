@@ -1,0 +1,86 @@
+.material-design{
+     .entity-icon_color_whiteBG {color: #5c6bc0; background: white;}
+     .details-header-text{line-height: 35px;margin-left: 10px;}
+     .gray-border {border-bottom:1px solid #dddddd}
+     .gray-border_top {border-top:1px solid #dddddd}
+     .card-comment {border-top:none}
+     .pointer-disabled{pointer-events: none;cursor: default;opacity: 0.6;}
+     .margin-left-20px{margin-left: 20px}
+     .pt30{padding-top: 30px;}
+     .page__main{
+        .commentBox{margin-top: -10px; border-top-left-radius: 0; border-top-right-radius: 0; box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.16);}
+        .card{ margin-bottom: 10px; }
+     }
+     .attachment-align{height: 40px;padding: 8px 10px 10px 0px}
+     .width_100{ min-width:100% }
+     .toolbar_padding{padding-right:20px;padding-left:0px}
+     .error{
+        .input-list__title h3{
+            color: rgba(244, 67, 54, 1);
+        }
+
+     }
+     .overflow{overflow: scroll}
+     .padding_attachment{padding-right: 20px;padding-top: 20px}
+     .ellipsis{overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+     .white{color:white}
+     .duedateWidth{min-width:69px}
+     .paddingLeft_0{
+         padding-left:0px
+     }
+     .margin-right-20px {
+         margin-right: 20px;
+     }
+     .header-module-divider {
+         width: 20px;
+         height: 30px;
+         border-left: 1px solid #5c6bc0;
+     }
+     .signoffreq{min-height: 180px}
+     .signoffAction{height: 300px; overflow: scroll}
+     .max-content{
+         max-width: none;
+         word-wrap: break-word;
+     }
+     .card-comment__text {
+         word-wrap: break-word;
+     }
+     .sidebar-nav-form-additional-info__element .label {
+       margin-right: 0px;
+     }
+     .signoff-task-highlight{
+         border: 2px solid #4caf50;
+     }
+     .toolbar_display_inline{
+         display:  inline;
+         width: 100%;
+     }
+     .mid-dot::before {
+         width: 4px;
+         height: 4px;
+         content: '';
+         display: inline-block;
+         vertical-align: top;
+         background: #737373;
+         border-radius: 50%;
+         margin: 8px 10px 0 10px;
+     }
+     .justify .input-row {
+        padding: 0px 20px 38px 20px;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        text-align: left;
+        min-width: 105px;
+    }
+    .padding_top_28px{
+        padding-top:28px
+    }
+    .padding_right_42px{
+        padding-right:42px
+    }
+}
+/* Below CSS require until whole WB uplifted to MD */
+div#content-placeholder.col-sm-9 .material-design section.page__container {
+    min-width: 1280px!important
+}

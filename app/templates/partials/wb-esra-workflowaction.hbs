@@ -1,0 +1,78 @@
+{{#wb-md-header-section-actions}}
+  {{#if (or (is-equal signoffActivity.saveEnabled 'V') (is-equal signoffActivity.saveEnabled 'E'))}}
+      {{#wb-md-header-section-actions-element}}
+      {{wb-md-button color="white" label="SAVE" action="saveDraft" disabled=(or (is-equal signoffActivity.saveEnabled 'V') headerDraftSaveDisable)}}
+      {{/wb-md-header-section-actions-element}}
+  
+  {{else if (or (is-equal model.esraActivity.saveEnabled 'V') (is-equal model.esraActivity.saveEnabled 'E'))}}
+      {{#wb-md-header-section-actions-element}}
+      {{wb-md-button color="white" label="SAVE" action="saveAction" disabled=(or (is-equal model.esraActivity.saveEnabled 'V') headerDraftSaveDisable)}}
+      {{/wb-md-header-section-actions-element}}
+  {{/if}}
+{{#if (or (is-equal model.esraActivity.saveDraftEnabled 'V') (is-equal model.esraActivity.saveDraftEnabled 'E'))}}
+    {{#wb-md-header-section-actions-element}}
+    {{wb-md-button color="white" label="SAVE DRAFT" action="saveDraft" disabled=(or (is-equal model.esraActivity.saveDraftEnabled 'V') headerDraftSaveDisable)}}
+    {{/wb-md-header-section-actions-element}}
+{{/if}}
+
+{{#if (or (is-equal model.esraActivity.deleteEnabled 'V') (is-equal model.esraActivity.deleteEnabled 'E'))}}
+    {{#wb-md-header-section-actions-element}}
+     {{wb-md-button color="white" label="DELETE"  action="deleteAction" disabled=(is-equal model.esraActivity.deleteEnabled 'V')}}
+     {{/wb-md-header-section-actions-element}}
+{{/if}}
+
+{{#if (or (is-equal model.esraActivity.submitEnabled 'V') (is-equal model.esraActivity.submitEnabled 'E'))}}
+      {{#wb-md-header-section-actions-element}}
+        {{wb-md-button type="primary" color="white" label="Submit" click=(action "workflowAction" 'submit') disabled=(is-equal model.esraActivity.submitEnabled 'V')}}
+      {{/wb-md-header-section-actions-element}}
+{{/if}}
+  {{#if (array-length model.esraActivity.actionMenuDealHeader.items count = 2 esraActivity=model.esraActivity flag='buttonlist')}}
+      {{#if (or (is-equal model.esraActivity.recallEnabled 'V') (is-equal model.esraActivity.recallEnabled 'E'))}}
+            {{#wb-md-header-section-actions-element}}
+              {{wb-md-button type="primary" color="white" label="RECALL" click=(action "workflowAction" 'recall') disabled=model.esraActivity.IsDisableRecall}}
+            {{/wb-md-header-section-actions-element}}
+      {{/if}}
+
+      {{#if (or (is-equal model.esraActivity.referToESRMEnabled 'V') (is-equal model.esraActivity.referToESRMEnabled 'E'))}}
+            {{#wb-md-header-section-actions-element}}
+              {{wb-md-button type="primary" color="white" label="REFER TO ESRM" click=(action "workflowAction" 'refertoesrm') disabled=model.esraActivity.IsDisableReferToESRM}}
+            {{/wb-md-header-section-actions-element}}
+      {{else if (or (is-equal model.esraActivity.assignToReviewEnabled 'V') (is-equal model.esraActivity.assignToReviewEnabled 'E'))}}
+          {{#wb-md-header-section-actions-element}}
+                  {{wb-md-button type="primary" color="white" label="ASSIGN" click=(action "workflowAction" 'assign') disabled=model.esraActivity.IsDisableAssignToReview}}
+          {{/wb-md-header-section-actions-element}}
+      {{/if}}
+
+      {{#if (or (is-equal model.esraActivity.withdrawEnabled 'V') (is-equal model.esraActivity.withdrawEnabled 'E'))}}
+            {{#wb-md-header-section-actions-element}}
+              {{wb-md-button type="primary" color="white" label="WITHDRAW" click=(action "workflowAction" 'withdraw') disabled=model.esraActivity.IsDisableWithdraw}}
+            {{/wb-md-header-section-actions-element}}
+      {{/if}}
+      {{#if (or (is-equal model.esraActivity.reopenEnabled 'V') (is-equal model.esraActivity.reopenEnabled 'E'))  }}
+            {{#wb-md-header-section-actions-element}}
+              {{wb-md-button type="primary" color="white" label="REOPEN" click=(action "workflowAction" 'reopen') disabled=model.esraActivity.IsDisableReopen}}
+            {{/wb-md-header-section-actions-element}}
+      {{/if}}
+
+      {{#if (or (is-equal model.esraActivity.approveEnabled 'V') (is-equal model.esraActivity.approveEnabled 'E'))  }}
+            {{#wb-md-header-section-actions-element}}
+              {{wb-md-button type="primary" color="white" label="APPROVE" click=(action "workflowAction" 'approve') disabled=model.esraActivity.IsDisableApprove}}
+            {{/wb-md-header-section-actions-element}}
+      {{/if}}
+      {{#if (or (is-equal model.esraActivity.rejectEnabled 'V') (is-equal model.esraActivity.rejectEnabled 'E'))  }}
+            {{#wb-md-header-section-actions-element}}
+              {{wb-md-button type="primary" color="white" label="REJECT" click=(action "workflowAction" 'reject') disabled=model.esraActivity.IsDisableReject}}
+            {{/wb-md-header-section-actions-element}}
+      {{/if}}
+      {{#if (or (is-equal model.esraActivity.referBackEnabled 'V') (is-equal model.esraActivity.referBackEnabled 'E'))  }}
+            {{#wb-md-header-section-actions-element}}
+              {{wb-md-button type="primary" color="white" label="REFER BACK" click=(action "workflowAction" 'referback') disabled=model.esraActivity.IsDisableReferBack}}
+            {{/wb-md-header-section-actions-element}}
+      {{/if}}
+  {{/if}}
+  {{#if (array-length model.esraActivity.actionMenuDealHeader.items count = menuCount esraActivity=model.esraActivity flag='headermenu')}}
+      {{#wb-md-header-section-actions-element}}
+        {{wb-md-action-menu config = model.esraActivity.actionMenuDealHeader}}
+      {{/wb-md-header-section-actions-element}}
+  {{/if}}
+{{/wb-md-header-section-actions}}

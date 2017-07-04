@@ -1,0 +1,13 @@
+{
+  "name": "nools",
+  "homepage": "https://github.com/doug-martin/nools",
+  "_release": "51fbe1ef54",
+  "_resolution": {
+    "type": "commit",
+    "commit": "51fbe1ef54"
+  },
+  "_source": "https://github.com/doug-martin/nools.git",
+  "_target": "51fbe1ef54",
+  "_originalSource": "nools",
+  "_direct": true
+}

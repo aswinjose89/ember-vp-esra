@@ -1,0 +1,103 @@
+{{#unless followupTsk.deleted}}
+{{#if (or (is-equal signoffActivity.signoffTaskReadonly 'V') (is-equal signoffActivity.signoffTaskReadonly 'E'))}}
+{{#wb-md-card}}
+<div id="task-highlight-{{if (is-equal followupTsk.id esraCommonService.taskHighlight.taskId) esraCommonService.taskHighlight.taskId}}" class="followup-task {{if (is-equal followupTsk.id esraCommonService.taskHighlight.taskId) ' signoff-task-highlight'}}">
+ {{#wb-md-content-toolbar pad="full" height="auto" vertical="top"}}
+                <div class="content-toolbar__row">
+                    <div class="content-toolbar__element">
+                        <div class="followup-task__message">
+                            <div class="followup-task__message-icon">
+                                {{wb-md-checkbox checked=entitlementHandler.isChecked click=(action 'workflowAction' entitlementHandler) disabled=(or entitlementHandler.isDisabled entitlementHandler.cardDisabled esraActivity.locked) iconColor=entitlementHandler.iconColor}}
+                            </div>
+                            <div class="followup-task__message-content max-content {{if (or (is-equal followupTsk.taskStatus '0002') (is-equal followupTsk.taskStatus '0006')) ' followup-task__message-content_status_stroke'}}">
+                                {{followupTsk.actionRequired}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-toolbar__row">
+                    <div class="content-toolbar__element ">
+                        {{#unless (is-equal followupTsk.taskStatus "0006")}}
+                            {{#if (is-equal (array-length followupActionMenu.items flag='ACTIONMENU') true)}}
+                                    {{wb-md-action-menu config=followupActionMenu class=(if (or entitlementHandler.cardDisabled esraActivity.locked) 'pointer-disabled')}}
+                            {{/if}}
+                        {{/unless}}
+                    </div>
+                    <div class="content-toolbar__element">
+                        <div class="margin-left-20px global-icon-toolbar__element">
+                            {{wb-md-icon iconName=(if hideTaskActions toggleTaskIconConfig.toggleElement.iconAlternative toggleTaskIconConfig.toggleElement.iconDefault) click=(action toggleProperty 'hideTaskActions') isDisabled=followupTsk.disableTaskToggleIcon active=hideTaskActions}}
+                        </div>
+                    </div>
+                </div>
+        {{/wb-md-content-toolbar}}
+    <div class="row">
+        <div class="col-lg-4">
+            {{#if (array-length followupTsk.assignees flag="signoffAtnAssignees")}}
+                <!-- {{wb-esra-signoff-action-assignees followupTsk=followupTsk assignees=assignees signoffconstant=signoffconstant}} -->
+                {{wb-md-static-info label=signoffconstant.label.dueDateResp config=dueDateRespList}}
+            {{else}}
+                {{wb-md-static-info label=signoffconstant.label.dueDateResp value=(date-format followupTsk.dueDate flag='dateformat') inlineList=true}}
+            {{/if}}
+        </div>
+        <div class="col-lg-4">
+            {{wb-md-static-info label=signoffconstant.label.createdBy value=followupTsk.createdBy inlineList=true}}
+        </div>
+        <div class="col-lg-4">
+            {{wb-md-static-info config=(config-handler followupTsk.taskStatus flag="STATUSCONFIG") inlineList=true}}
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            {{wb-md-static-info label=signoffconstant.label.repeat value=(picklist-value followupTsk.repeat type='SIGNOFFREPEAT') inlineList=true}}
+        </div>
+          <div class="col-lg-4">
+            {{wb-md-static-info label=signoffconstant.label.endRepeat value=(date-format followupTsk.endRepeat flag='ENDREPEAT') inlineList=true}}
+        </div>
+          <div class="col-lg-4">
+            {{wb-md-static-info label=signoffconstant.label.emailReminder value=(date-format followupTsk.emailReminderDate flag='EMAILREMINDER') inlineList=true}}
+        </div>
+
+    </div>
+    {{#if hideTaskActions}}
+    <div class="row">
+        <div class="col-lg-4">
+            {{wb-md-static-info label=signoffconstant.label.assignedby value=followupTsk.assignedBy inlineList=true}}
+        </div>
+        <div class="col-lg-4">
+            {{wb-md-static-info label=signoffconstant.label.assignedon value=(date-format followupTsk.assignedDate flag='dateformat') inlineList=true}}
+        </div>
+        {{!--<div class="col-lg-4">
+            <div class="content-toolbar__element static-info pull-right">--}}
+                {{!--{{signoffAttachmentList}}--}}
+                {{!--{{#if (is-equal entitlementHandler.isAttachmentEnabled true)}}
+                    {{#unless (is-equal followupTsk.taskStatus "0006")}}--}}
+                        {{!--{{wb-md-icon iconName="attach_file" click=(action "openAttachmentFlyout" followupTsk) isDisabled=(if (or entitlementHandler.cardDisabled esraActivity.locked) 'pointer-disabled')}}--}}
+                    {{!--{{/unless}}
+                {{/if}}--}}
+            {{!--</div>
+        </div>--}}
+    </div>
+       {{wb-esra-completioncomments followupTsk=followupTsk 
+                                    signoffconstant=signoffconstant 
+                                    entitlementHandler=entitlementHandler 
+                                    signoffActivity=signoffActivity 
+                                    esraActivity=esraActivity
+                                    deleteFileAction="deleteFileAction"
+                                    fileDownload="fileDownload"}}
+       {{!--{{#if attachmentList}}
+        <div class="row">
+            {{wb-md-attachment-list-slider fileList=attachmentList
+                                            openAttachmentAction="fileDownload"
+                                            readonly=readOnly
+                                            deleteFileAction="deleteFileAction"
+                                            class=(if (or entitlementHandler.cardDisabled esraActivity.locked) 'pointer-disabled')
+                                            deleteConfirmationMessage=deletePopupconfig.message
+                                            deleteConfirmationMessageTitle=deletePopupconfig.title}}
+        </div>
+     {{/if}}--}}
+    {{/if}}
+</div>
+{{/wb-md-card}}
+{{/if}}
+{{/unless}}

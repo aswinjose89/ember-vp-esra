@@ -1,0 +1,43 @@
+{{#wb-md-card}}
+    <div class="card__header">
+        {{#wb-md-content-toolbar pad="full"}}
+            {{#if model.label}}
+                <div class="content-toolbar__row">
+                    <div class="content-toolbar__element">
+                        <div class="content-toolbar__title content-toolbar__title_color_blue">{{model.label}}</div>
+                    </div>
+                </div>
+            {{/if}}
+            <div class="content-toolbar__row">
+                <div class="content-toolbar__element">
+                    {{wb-md-button type="link" label="+ ADD" size="small" disabled=(or screenReadOnly isAddDisabled (is-equal esraActivity.outcome '0001')) click=(action 'addNewSector')}}
+                </div>
+            </div>
+        {{/wb-md-content-toolbar}}
+        {{#if (and (gt tabSections.length 0) isTabEnabled)}}       
+            {{#if (gt tabs.length 0)}}
+            {{wb-md-tabs selectedIndex=tabSelectedIndex isDeletable=true isLastTabDeletable=true isStatic=false tabs=tabs onDelete=(action 'deleteSector')}}
+                {{#wb-md-tabs-content selectedIndex=tabSelectedIndex}}
+                    {{#each tabSections as |tab index|}}
+                        {{#wb-md-tab-content isOpen=true}}
+                            {{#wb-md-card}}
+                                {{#if (is-equal tab.layout 'new')}}
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            {{wb-md-input type='select' required=true selectedItem=selectedSector promptMessage='Please select sector' label='Sector Title' content=sectors optionValuePath='code' optionLabelPath='longDescription'}}
+                                        </div>
+                                        <div class="col-xs-1 pt30">{{wb-md-button type='primary' size="small" label="Submit" color="blue" click=(action 'createSector')}}</div>
+                                    </div>
+                                {{else}}
+                                    {{#each tab.fsFields as |fsField|}}
+                                        {{wb-esra-field model=fsField form=fsForm doRefresh=(action "doRefresh") screenReadOnly=screenReadOnly esraActivity=esraActivity}}
+                                    {{/each}}
+                                {{/if}}
+                            {{/wb-md-card}}
+                        {{/wb-md-tab-content}}
+                    {{/each}}
+                {{/wb-md-tabs-content}}
+            {{/if}}
+        {{/if}}
+    </div>
+{{/wb-md-card}}

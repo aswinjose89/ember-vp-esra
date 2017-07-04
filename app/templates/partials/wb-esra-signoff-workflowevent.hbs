@@ -1,0 +1,25 @@
+ {{#if componentConfig.multiselect}}
+ {{wb-md-input 
+                type='select'
+                content=userContent
+                selectedItems=dataJSON.headerDataJSON.assignees
+                config=componentConfig.assignee.userSearchConfig
+                remoteSearch= true
+                leftIconName="person"
+                searchAction=(action 'searchEsrmAssignee')}}
+{{/if}}
+   
+{{wb-md-input
+                label=componentConfig.comments.label 
+                leftIconName=componentConfig.comments.leftIconName
+                maxLength= componentConfig.comments.maxLength
+                required= componentConfig.comments.required
+                value=  dataJSON.headerDataJSON.comment}}   
+{{#if componentConfig.fileAttachment.isAttachment}}
+     <div class="row">
+            {{wb-md-attachment-list-slider fileList=componentConfig.popUpAttachmentList
+                                            deleteFileAction="deletePopUpFileAction"
+                                            deleteConfirmationMessage=componentConfig.deleteAttachments.message
+                                            deleteConfirmationMessageTitle=componentConfig.deleteAttachments.title}}
+        </div>
+{{/if}}

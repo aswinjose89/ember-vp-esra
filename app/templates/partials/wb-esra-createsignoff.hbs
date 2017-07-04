@@ -1,0 +1,53 @@
+{{wb-md-input label=componentConfig.atnReq.label
+                            maxLength=componentConfig.atnReq.maxLength
+                            multiline=true
+                            value=componentConfig.followupTasks.actionRequired
+                            leftIconName=componentConfig.atnReq.leftIconName
+                            required=componentConfig.atnReq.required }}
+
+         {{wb-md-input
+                type='select'
+                content=userContent
+                selectedItems=componentConfig.followupTasks.assignees
+                config=userSearchConfig
+                leftIconName="person"
+                remoteSearch= true
+                onOpen=(action 'selectAssignee')
+                searchAction=(action 'searchAssignee')
+                }}
+
+               <div class="row">
+                    <div class="col-lg-6">
+                        {{wb-md-input type=componentConfig.dueDate.type
+                                    label=componentConfig.dueDate.label
+                                    format=componentConfig.dueDate.format
+                                    value=componentConfig.followupTasks.dueDate
+                                    required=componentConfig.dueDate.required
+                                    startDate=componentConfig.dueDate.startDate
+                                    leftIconName=componentConfig.dueDate.leftIconName }}
+                    </div>
+                    <div class="col-lg-6">
+                        {{wb-md-input   label=componentConfig.repeat.label
+                                        type=componentConfig.repeat.type
+                                        selectedItem=selectedStatus
+                                        content=signoffRepeat
+                                        value=componentConfig.followupTasks.repeat
+                                        optionValuePath=componentConfig.repeat.optionValuePath
+                                        optionLabelPath=componentConfig.repeat.optionLabelPath
+                                        onChange=componentConfig.repeat.changeAction
+                                        inlineList=true}}
+                    </div>
+            </div>
+
+               <div class="row">
+                    <div class="col-lg-6">
+                        {{wb-md-input type=componentConfig.endRepeat.type
+                                    label=componentConfig.endRepeat.label
+                                    format=componentConfig.endRepeat.format
+                                    required=componentConfig.endRepeat.required
+                                    startDate=componentConfig.followupTasks.dueDate
+                                    value=componentConfig.followupTasks.endRepeat
+                                    leftIconName=componentConfig.endRepeat.leftIconName
+                                    disabled=isEndRepeatDisabled }}
+                    </div>
+            </div>
